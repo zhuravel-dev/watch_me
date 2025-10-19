@@ -25,7 +25,7 @@ class MovieInfo extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
-        Text('⭐ ${voteAverage.toStringAsFixed(1)}', style: const TextStyle(fontSize: 16)),
+        Text('⭐ ${voteAverage.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '')}'),
         const SizedBox(height: 8),
         Text('Release: $releaseDate', style: const TextStyle(fontSize: 14, color: Colors.grey)),
         const SizedBox(height: 16),

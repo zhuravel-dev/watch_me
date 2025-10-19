@@ -30,7 +30,7 @@ class MovieItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text('⭐ ${movie.voteAverage}'),
+          Text('⭐ ${movie.voteAverage.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '')}'),
         ],
       ),
     );

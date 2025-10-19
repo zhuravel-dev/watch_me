@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:watch_me/domain/entities/movie.dart';
-import 'package:watch_me/presentation/providers/favoritesProvider.dart';
+import 'package:watch_me/presentation/data_providers/favoritesProvider.dart';
 import 'favorite_button.dart';
 
 class FavoriteButtonWrapper extends ConsumerWidget {

@@ -4,7 +4,7 @@ import 'package:watch_me/presentation/components/custom_app_bar.dart';
 import 'package:watch_me/presentation/components/favorite_button_wrapper.dart';
 import 'package:watch_me/presentation/components/movie_header.dart';
 import 'package:watch_me/presentation/components/movie_info.dart';
-import 'package:watch_me/presentation/providers/movieDetailsProvider.dart';
+import 'package:watch_me/presentation/data_providers/movieDetailsProvider.dart';
 
 class MovieDetailsScreen extends ConsumerWidget {
   final int movieId;
@@ -14,9 +14,8 @@ class MovieDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final movieAsync = ref.watch(movieDetailsProvider(movieId));
-
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Movie details'),
+      appBar: CustomAppBar(title: 'Movie details'),
       body: movieAsync.when(
         data: (movie) {
           return SingleChildScrollView(
@@ -24,20 +23,15 @@ class MovieDetailsScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 MovieHeader(backdropPath: movie.backdropPath, posterPath: movie.posterPath),
-
-                SizedBox(height: 150 + 300 / 2),
-
+                const SizedBox(height: 150 + 300 / 2),
                 MovieInfo(
                   title: movie.title,
                   voteAverage: movie.voteAverage,
                   releaseDate: movie.releaseDate,
                   overview: movie.overview,
                 ),
-
                 const SizedBox(height: 24),
-
                 FavoriteButtonWrapper(movie: movie),
-
                 const SizedBox(height: 32),
               ],
             ),
