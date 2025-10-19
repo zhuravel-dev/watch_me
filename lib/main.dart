@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:watch_me/data/repositories/movie_repository.dart';
-import 'data/services/apis/movie_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:watch_me/presentation/views/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
+  await dotenv.load(fileName: ".env");
 
-  final api = MovieApi(apiKey: dotenv.env["API_KEY"]!, accessToken: dotenv.env["API_ACCESS_KEY"]!);
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
 
-  final repository = MovieRepository(api);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  final movies = await repository.getTopRatedMovies(page: 1);
-  print('Total movies fetched: ${movies.length}');
-  print('First movie: ${movies.first.title}');
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Watch Me',
+      home: const MainScreen(),
+    );
+  }
 }
