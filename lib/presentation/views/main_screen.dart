@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:watch_me/presentation/components/movie_list.dart';
-import 'package:watch_me/presentation/providers/app_providers.dart';
+import 'package:watch_me/presentation/providers/topRatedMoviesProvider.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
