@@ -1,12 +1,17 @@
 import 'package:go_router/go_router.dart';
 import 'package:watch_me/presentation/views/details_screen.dart';
 import 'package:watch_me/presentation/views/main_screen.dart';
+import 'package:watch_me/presentation/views/serch_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
     initialLocation: '/',
     routes: [
       GoRoute(path: '/', builder: (context, state) => const MainScreen()),
+      GoRoute(
+        path: '/search',
+        builder: (context, state) => const SearchScreen(),
+      ),
       GoRoute(
         path: '/movie/:id',
         builder: (context, state) {

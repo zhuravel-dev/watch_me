@@ -16,7 +16,7 @@ class MainScreen extends ConsumerWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Movies', showThemeIcon: true),
+        appBar: CustomAppBar(title: 'Movies', showThemeIcon: true, isShowSearch: true),
         body: Column(
           children: [
             TabBar(
