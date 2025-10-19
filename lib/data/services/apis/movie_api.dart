@@ -8,7 +8,7 @@ class MovieApi implements IMovieApi {
   final String apiKey;
   final String apiAccessKey;
 
-  MovieApi({Dio? dio})
+  MovieApi({Dio? dio, required String apiKey, required String accessToken})
     : dio = dio ?? Dio(BaseOptions(baseUrl: 'https://api.themoviedb.org/3')),
       apiKey = dotenv.env["API_KEY"] ?? '',
       apiAccessKey = dotenv.env["API_ACCESS_KEY"]?.trim() ?? '';
