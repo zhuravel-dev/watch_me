@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MovieInfo extends StatelessWidget {
   final String title;
@@ -16,6 +17,8 @@ class MovieInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formattedDate = _formatDate(releaseDate);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -27,7 +30,7 @@ class MovieInfo extends StatelessWidget {
         const SizedBox(height: 8),
         Text('⭐ ${voteAverage.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '')}'),
         const SizedBox(height: 8),
-        Text('Release: $releaseDate', style: const TextStyle(fontSize: 14, color: Colors.grey)),
+        Text('Release: $formattedDate', style: const TextStyle(fontSize: 14, color: Colors.grey)),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -35,5 +38,15 @@ class MovieInfo extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+String _formatDate(String dateString) {
+  if (dateString.isEmpty) return '';
+  try {
+    final date = DateTime.parse(dateString);
+    return DateFormat('dd.MM.yyyy').format(date);
+  } catch (_) {
+    return dateString;
   }
 }

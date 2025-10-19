@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:watch_me/presentation/configurations/theme/theme_provider.dart';
-import 'package:watch_me/presentation/configurations/theme/theme.dart';
 
 class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String title;
   final bool showThemeIcon;
+  final bool isShowSearch;
 
-  const CustomAppBar({super.key, required this.title, this.showThemeIcon = false});
+  const CustomAppBar({
+    super.key,
+    required this.title,
+    this.showThemeIcon = false,
+    this.isShowSearch = false,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final themeMode = ref.watch(themeProvider);
 
-    final brightness = themeMode == ThemeMode.system
-        ? MediaQuery.of(context).platformBrightness
-        : (themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light);
-
-    final backgroundColor = brightness == Brightness.dark
-        ? DarkColors.primary
-        : LightColors.primary;
-    final foregroundColor = brightness == Brightness.dark ? DarkColors.text : LightColors.text;
-    final iconColor = foregroundColor;
-
     return AppBar(
-      title: Text(title, style: TextStyle(color: foregroundColor)),
-      backgroundColor: backgroundColor,
-      iconTheme: IconThemeData(color: iconColor),
+      title: Text(title, style: TextStyle(color: theme.appBarTheme.foregroundColor)),
+      backgroundColor: theme.appBarTheme.backgroundColor,
+      iconTheme: theme.appBarTheme.iconTheme,
       actions: [
+        if (isShowSearch)
+          IconButton(
+            icon: Icon(Icons.search, color: theme.appBarTheme.iconTheme?.color),
+            onPressed: () {
+              context.push('/search');
+            },
+          ),
         if (showThemeIcon)
           IconButton(
             icon: Icon(
-              brightness == Brightness.dark ? Icons.light_mode : Icons.dark_mode,
-              color: iconColor,
+              theme.brightness == Brightness.dark ? Icons.light_mode : Icons.dark_mode,
+              color: theme.appBarTheme.iconTheme?.color,
             ),
             onPressed: () {
-              if (brightness == Brightness.dark) {
+              if (themeMode == ThemeMode.dark) {
                 ref.read(themeProvider.notifier).setLight();
               } else {
                 ref.read(themeProvider.notifier).setDark();
