@@ -10,6 +10,6 @@ class HiveDb {
   }
 
   static Future<void> _openBoxes() async {
-    await Hive.openBox<int>('favorites');
+    await Hive.openBox<MovieHiveModel>('favorites');
   }
 }

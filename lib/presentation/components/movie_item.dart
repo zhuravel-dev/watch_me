@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watch_me/domain/entities/movie.dart';
+import 'package:watch_me/presentation/components/poster_item.dart';
 
 class MovieItem extends StatelessWidget {
   final Movie movie;
@@ -15,13 +16,11 @@ class MovieItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ClipRRect(
+            child: PosterItem(
+              imagePath: movie.posterPath,
+              width: double.infinity,
+              height: double.infinity,
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
             ),
           ),
           const SizedBox(height: 8),

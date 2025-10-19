@@ -24,7 +24,7 @@ class MovieList extends StatelessWidget {
         return MovieItem(
           movie: movie,
           onTap: () {
-            context.go('/movie/${movie.id}');
+            context.push('/movie/${movie.id}');
           },
         );
       },
